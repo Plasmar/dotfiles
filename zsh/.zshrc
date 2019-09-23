@@ -70,7 +70,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting tmux virtualenv ssh-agent)
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmux virtualenv ssh-agent)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
 source $ZSH/oh-my-zsh.sh
 
@@ -116,5 +116,7 @@ alias devmux="tmux new-session -s plasmar \; \
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
+export FZF_BASE="$HOME/.fzf"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
