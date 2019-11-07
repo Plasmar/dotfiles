@@ -102,14 +102,14 @@ source $ZSH/oh-my-zsh.sh
 alias ls="ls -lah"
 alias vim='nvim'
 
-alias devmux="tmux new-session -s plasmar \; \
-  		send-keys 'htop' C-m \; \
-  		split-window -v -p 75 \; \
-  		split-window -h -p 30 \; \
-  		send-keys 'nvim' C-m \; \
-  		select-pane -t 1 \; \
-  		split-window -v \; \
-  		send-keys 'ls ~/code' C-m \;"
+# alias devmux="tmux new-session -s plasmar \; \
+ #  		send-keys 'htop' C-m \; \
+  # 		split-window -v -p 75 \; \
+  # 		split-window -h -p 30 \; \
+  # 		send-keys 'nvim' C-m \; \
+  # 		select-pane -t 1 \; \
+  # 		split-window -v \; \
+  # 		send-keys 'ls ~/code' C-m \;"
 
 
 
@@ -120,3 +120,6 @@ export FZF_BASE="$HOME/.fzf"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
