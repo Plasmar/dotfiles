@@ -1,5 +1,3 @@
-export TERM="xterm-256color"
-
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -10,7 +8,7 @@ export ZSH="/Users/cameron.merrick/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="muse"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -28,14 +26,8 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -44,7 +36,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
- ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -70,8 +62,8 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmux virtualenv ssh-agent)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
+plugins=(vault git zsh-autosuggestions docker docker-compose aws python ssh-agent)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -99,27 +91,17 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ls="ls -lah"
-alias vim='nvim'
-
-# alias devmux="tmux new-session -s plasmar \; \
- #  		send-keys 'htop' C-m \; \
-  # 		split-window -v -p 75 \; \
-  # 		split-window -h -p 30 \; \
-  # 		send-keys 'nvim' C-m \; \
-  # 		select-pane -t 1 \; \
-  # 		split-window -v \; \
-  # 		send-keys 'ls ~/code' C-m \;"
-
-
-
-export PATH="/usr/local/opt/curl/bin:$PATH"
+alias vim="nvim"
+alias ls='ls -ghpa'
 export PATH="/usr/local/sbin:$PATH"
+export TERM=xterm-256color
 
-export FZF_BASE="$HOME/.fzf"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# enable vi mode in the shell
+bindkey -v
+
+complete -o nospace -C /usr/local/bin/vault vault
+
+# export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"

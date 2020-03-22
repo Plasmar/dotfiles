@@ -1,5 +1,3 @@
-""ctrlp_by_filename" Optixal's Neovim Init.vim
-
 """ Vim-Plug
 call plug#begin()
 
@@ -8,11 +6,11 @@ Plug 'mhinz/vim-startify'
 Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
-" Plug 'junegunn/vim-journal'
+Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
@@ -22,32 +20,31 @@ Plug 'nightsense/nemo'
 Plug 'yuttie/hydrangea-vim'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'rhysd/vim-color-spring-night'
-Plug 'christoomey/vim-tmux-navigator'
+
 " Functionalities
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
+Plug 'sbdchd/neoformat'
+Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
-Plug 'Yggdroot/indentLine'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'chrisbra/Colorizer'
 Plug 'heavenshell/vim-pydocstring'
-Plug 'vim-scripts/loremipsum'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim'
 Plug 'dkarter/bullets.vim'
 
 " Entertainment
@@ -55,12 +52,12 @@ Plug 'dkarter/bullets.vim'
 
 call plug#end()
 
-""" Python3 
-let python_highlight_all=1
-let g:deoplete#enable_at_startup = 1
+""" Python3 VirtualEnv
+" let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
+
 """ Coloring
 syntax on
-color dracula
+" color dracula
 highlight Pmenu guibg=white guifg=black gui=bold
 highlight Comment gui=bold
 highlight Normal gui=none
@@ -75,16 +72,26 @@ highlight LineNr guibg=NONE ctermbg=NONE
 
 """ Other Configurations
 filetype plugin indent on
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4 
+set expandtab 
+set smarttab 
+set autoindent
 set incsearch ignorecase smartcase hlsearch
 set ruler laststatus=2 showcmd showmode
 set list listchars=trail:»,tab:»-
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 set wrap breakindent
 set encoding=utf-8
 set number
-set relativenumber
 set title
+set relativenumber
+set hidden
+
+" faster pane switching
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 """ Plugin Configurations
 
@@ -97,7 +104,7 @@ let g:NERDTreeDirArrowCollapsible = '↡'
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 let g:airline_section_warning = ''
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 
 " Neovim :Terminal
 tmap <Esc> <C-\><C-n>
@@ -106,9 +113,6 @@ tmap <C-w> <Esc><C-w>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#options#on_text_changed_i = 0
 " Supertab
 let g:SuperTabDefaultCompletionType = "<C-n>"
 
@@ -125,34 +129,31 @@ nmap ga <Plug>(EasyAlign)
 let g:indentLine_char = '▏'
 let g:indentLine_color_gui = '#363949'
 
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
 " TagBar
 let g:tagbar_width = 30
 let g:tagbar_iconchars = ['↠', '↡']
 
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+
 " CtrlP
-let g:show_hidden_files = 1
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_by_filename = 0
 
-" fzf-vim
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'Type'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Character'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-""" Filetype-Specific Configurations
+"""" Filetype-Specific Configurations
 
 " HTML, XML, Jinja
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -180,14 +181,12 @@ endfunction
 function! ColorDracula()
     let g:airline_theme=''
     color dracula
-    IndentLinesEnable
 endfunction
 
 " Seoul256 Mode (Dark & Light)
 function! ColorSeoul256()
     let g:airline_theme='silver'
     color seoul256
-    IndentLinesDisable
 endfunction
 
 " Forgotten Mode (Light)
@@ -196,7 +195,6 @@ function! ColorForgotten()
     " Light colors: forgotten-light, nemo-light
     let g:airline_theme='tomorrow'
     color forgotten-light
-    IndentLinesDisable
 endfunction
 
 " Zazen Mode (Black & White)
@@ -206,14 +204,17 @@ function! ColorZazen()
     IndentLinesEnable
 endfunction
 
-""" Custom Mappings
 
+""" run python with F5 
+nmap ,p :w<CR>:!python3 %<CR>
+
+""" Custom Mappings
 let mapleader=","
 nmap <leader>q :NERDTreeToggle<CR>
 nmap \ <leader>q
 nmap <leader>w :TagbarToggle<CR>
 nmap <leader>ee :Colors<CR>
-nmap <leader>ea :AirlineTheme 
+nmap <leader>ea :AirlineTheme
 nmap <leader>e1 :call ColorDracula()<CR>
 nmap <leader>e2 :call ColorSeoul256()<CR>
 nmap <leader>e3 :call ColorForgotten()<CR>
@@ -225,10 +226,9 @@ nmap <leader>a gaip*
 nmap <leader>s <C-w>s<C-w>j:terminal<CR>
 nmap <leader>vs <C-w>v<C-w>l:terminal<CR>
 nmap <leader>d <Plug>(pydocstring)
-nmap <leader>f :Files<CR>
 nmap <leader>g :Goyo<CR>
 nmap <leader>h :RainbowParentheses!!<CR>
-" nmap <leader>j :set filetype=journal<CR>
+nmap <leader>j :set filetype=journal<CR>
 nmap <leader>k :ColorToggle<CR>
 nmap <leader>l :Limelight!!<CR>
 xmap <leader>l :Limelight!!<CR>
@@ -238,8 +238,13 @@ nmap <silent> <leader><leader> :noh<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 
-"split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+""" Kite / Autocomplete Settings
+"let g:kite_tab_complete=1
+"autocmd CompleteDone * if !pumvisible() | pclose | endif
+"nmap <silent> <buffer> gK <Plug>(kite-docs)
+"set completeopt-=menu
+"set completeopt+=menuone   " Show the completions UI even with only 1 item
+"set completeopt-=longest   " Don't insert the longest common text
+"set completeopt-=preview   " Hide the documentation preview window
+"set completeopt+=noinsert  " Don't insert text automatically
+"set completeopt-=noselect  " Highlight the first completion automatically
