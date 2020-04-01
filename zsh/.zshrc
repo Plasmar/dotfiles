@@ -92,7 +92,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
-alias ls='ls -ghpa'
+alias ls='ls -Ghp'
 export PATH="/usr/local/sbin:$PATH"
 export TERM=xterm-256color
 
