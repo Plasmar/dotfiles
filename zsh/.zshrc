@@ -2,13 +2,13 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/cameron.merrick/.oh-my-zsh"
+export ZSH="/Users/merricc/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="muse"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -62,7 +62,7 @@ ZSH_THEME="muse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vault git zsh-autosuggestions docker docker-compose aws python ssh-agent)
+plugins=(vault git zsh-autosuggestions tmux docker docker-compose aws python ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -92,12 +92,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
-alias ls='ls -Ghp'
-export PATH="/usr/local/sbin:$PATH"
-export TERM=xterm-256color
+alias ls='ls -Ghpa'
+export EDITOR="nvim"
 
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # enable vi mode in the shell
 bindkey -v
@@ -105,3 +102,5 @@ bindkey -v
 complete -o nospace -C /usr/local/bin/vault vault
 
 # export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
